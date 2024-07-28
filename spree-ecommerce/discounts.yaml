@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   labels:
     app: ecommerce
-  name: advertisements
+    service: discounts
+  name: discounts
 spec:
   replicas: 1
   selector:
@@ -15,10 +16,11 @@ spec:
       creationTimestamp: null
       labels:
         app: ecommerce
+        service: discounts
     spec:
       containers:
-      - image: salomaosan/ads:latest
-        name: advertisements
+      - image: salomaosan/discounts:latest
+        name: discounts
         env:
           - name: FLASK_DEBUG
             value: "1"
@@ -32,7 +34,7 @@ spec:
           - name: POSTGRES_HOST
             value: "db"
         ports:
-        - containerPort: 5002
+        - containerPort: 5001
         resources: {}
 ---
 apiVersion: v1
@@ -40,12 +42,15 @@ kind: Service
 metadata:
   labels:
     app: ecommerce
-  name: advertisements
+    service: discounts
+  name: discounts
 spec:
   ports:
-  - port: 5002
+  - port: 5001
     protocol: TCP
-    targetPort: 5002
+    targetPort: 5001
   selector:
     app: ecommerce
-status:
+    service: discounts
+  sessionAffinity: None
+  type: ClusterIP

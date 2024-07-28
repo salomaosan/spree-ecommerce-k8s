@@ -17,16 +17,14 @@ data:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: task-pv-volume 
+  name: task-pv-volume
   labels:
     type: local
 spec:
-  storageClassName: manual 
   capacity:
     storage: 5Gi
   accessModes:
     - ReadWriteOnce 
-  persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: "/mnt/data" 
 ---
@@ -39,8 +37,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: manual
+      storage: 5Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -65,8 +62,6 @@ spec:
       containers:
       - image: postgres:11-alpine
         name: postgres
-        securityContext:
-          privileged: true 
         ports:
           - containerPort: 5432
         env:
@@ -88,6 +83,7 @@ spec:
       - name: postgresdb
         persistentVolumeClaim:
             claimName: task-pvc-volume
+            readOnly: false
 ---
 apiVersion: v1
 kind: Service
