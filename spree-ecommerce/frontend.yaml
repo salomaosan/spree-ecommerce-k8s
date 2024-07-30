@@ -11,11 +11,11 @@ spec:
     matchLabels:
       app: ecommerce
       service: frontend
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+  strategy: 
+    # rollingUpdate:
+    #   maxSurge: 25%
+    #   maxUnavailable: 25%
+    type: Recreate
   template:
     metadata:
       labels:
@@ -35,14 +35,6 @@ spec:
             secretKeyRef:
               key: pw
               name: db-password
-        # - name: DISCOUNTS_ROUTE
-        #   value: "http://discounts"
-        # - name: DISCOUNTS_PORT
-        #   value: "5001"
-        # - name: ADS_ROUTE
-        #   value: "http://advertisements"
-        # - name: ADS_PORT
-        #   value: "5002"
         image: salomaosan/storefront:latest
         imagePullPolicy: Always
         name: ecommerce-spree-observability
