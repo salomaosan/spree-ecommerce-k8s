@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgresql-config-map
+data:
+  postgresql-config: |-
+    ad_identifiers:
+      - postgres
+    init_config:
+    instances:
+      - host: "%%host%%"
+        port: "5432"
+        username: "user"
+        password: "%%env_PG_PASSWORD%%"

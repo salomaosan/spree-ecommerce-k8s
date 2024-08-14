@@ -12,7 +12,7 @@ metadata:
     service: db
 type: Opaque
 data:
-  pw: password
+  pw: ZGF0YWRvZw==
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -58,6 +58,20 @@ spec:
       labels:
         service: db
         app: ecommerce
+      annotations:
+        ad.datadoghq.com/postgres.checks: |
+          {
+            "postgres": {
+              "instances": [
+                {
+                  "host": "%%host%%",
+                  "port":"5432",
+                  "username":"user",
+                  "password":"datadog"
+                }
+              ]
+            }
+          }
     spec:
       containers:
       - image: postgres:11-alpine
