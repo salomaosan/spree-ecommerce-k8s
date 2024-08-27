@@ -32,7 +32,7 @@ datadog:
   # datadog.apiKey -- Your Datadog API key
 
   ## ref: https://app.datadoghq.com/account/settings#agent/kubernetes
-  apiKey: 6aece7422dba9f93b87861d1c646d3d8
+  apiKey: 1b269a54cb24bdb2706b5e14cd61488c
 
   # datadog.apiKeyExistingSecret -- Use existing Secret which stores API key instead of creating a new one. The value should be set with the `api-key` key inside the secret.
 
@@ -262,8 +262,8 @@ datadog:
 
   ## Learn more about tagging: https://docs.datadoghq.com/tagging/
   tags: 
-    - "env:treinamento"
-    - "tipo:lab"
+    - "env:prod"
+    - "tipo:k8s"
 
   # datadog.checksCardinality -- Sets the tag cardinality for the checks run by the Agent.
 
@@ -427,7 +427,7 @@ datadog:
     # datadog.logs.containerCollectAll -- Enable this to allow log collection for all containers
 
     ## ref: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
-    containerCollectAll: false
+    containerCollectAll: true
 
     # datadog.logs.containerCollectUsingFiles -- Collect logs from files in /var/log/pods instead of using container runtime API
 

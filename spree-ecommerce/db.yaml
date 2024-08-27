@@ -52,7 +52,8 @@ spec:
     matchLabels:
       service: db
       app: ecommerce
-  strategy: {}
+  strategy: 
+    type: Recreate
   template:
     metadata:
       labels:
@@ -72,6 +73,7 @@ spec:
               ]
             }
           }
+        ad.datadoghq.com/postgres.logs: '[{"source":"postgresql","service":"database"}]'
     spec:
       containers:
       - image: postgres:11-alpine
